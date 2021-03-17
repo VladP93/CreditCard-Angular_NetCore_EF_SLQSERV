@@ -13,8 +13,8 @@
     <div class="col-lg-6">
       <div class="card">
         <div class="card-body">
-          <h5 class="title">AGREGAR TARJETA</h5>
-          <form [formGroup]="form" (ngSubmit)="agregarTarjeta()">
+          <h5 class="title">{{ accion | uppercase }} TARJETA</h5>
+          <form [formGroup]="form" (ngSubmit)="guardarTarjeta()">
             <div class="input-group input-group-lg mb-3">
               <span class="input-group-text"
                 ><i
@@ -102,8 +102,8 @@
                 type="submit"
                 class="btn btn-success btn-lg"
               >
-                <i class="fas fa-plus"></i>
-                Agregar
+                <i class="fas fa-check"></i>
+                Aceptar
               </button>
             </div>
           </form>
@@ -116,14 +116,19 @@
           <h5 class="title">LISTADO DE TARJETAS</h5>
           <table class="table">
             <tbody>
-              <tr *ngFor="let tar of listTarjetas; let i = index">
+              <tr *ngFor="let tar of listTarjetas">
                 <td>{{ tar.titular }}</td>
                 <td>{{ tar.noTarjeta }}</td>
                 <td>{{ tar.fechaExp }}</td>
-                <td><i class="far fa-edit text-info"></i></td>
                 <td>
                   <i
-                    (click)="eliminarTarjeta(i)"
+                    (click)="editarTarjeta(tar)"
+                    class="far fa-edit text-info"
+                  ></i>
+                </td>
+                <td>
+                  <i
+                    (click)="eliminarTarjeta(tar.id)"
                     class="far fa-trash-alt text-danger"
                   ></i>
                 </td>
